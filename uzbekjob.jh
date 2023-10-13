@@ -1,0 +1,47 @@
+
+entity Users {
+   userName String
+   email String
+   password String
+   status String
+   createdAt Instant
+   updatedAt Instant
+   createdBy String
+   updatedBy String
+}
+
+entity Persons{
+   name String
+   mobilePhone String
+}
+
+entity CompanyMembers {
+    companyName String
+    businessRegNum String
+    represantitiveName String
+    companyAddress String
+    subscriberName String
+    phoneNumber String
+    membersType MembersTypeEnum
+}
+
+
+enum MembersTypeEnum {
+    FIRM_MEMBER, COMPANY_MEMBER
+}
+
+entity Authority {
+    name String
+}
+
+relationship OneToOne {
+   Persons {userId} to Users
+   CompanyMembers {userId} to Users
+}
+
+relationship ManyToMany {
+   Users{authority} to Authority{user}
+}
+
+
+

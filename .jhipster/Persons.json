@@ -1,0 +1,23 @@
+{
+  "applications": "*",
+  "entityTableName": "persons",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mobilePhone",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Persons",
+  "relationships": [
+    {
+      "otherEntityName": "users",
+      "relationshipName": "userId",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ]
+}

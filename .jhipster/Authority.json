@@ -1,0 +1,20 @@
+{
+  "applications": "*",
+  "entityTableName": "authority",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Authority",
+  "relationships": [
+    {
+      "otherEntityName": "users",
+      "otherEntityRelationshipName": "authority",
+      "relationshipName": "user",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ]
+}
