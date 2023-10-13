@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="companyMembers">
+      <h2 data-cy="companyMembersDetailsHeading">
+        <span jhiTranslate="uzbekjobjhipsterApp.companyMembers.detail.title">Company Members</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ companyMembers.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="uzbekjobjhipsterApp.companyMembers.companyName">Company Name</span></dt>
+        <dd>
+          <span>{{ companyMembers.companyName }}</span>
+        </dd>
+        <dt><span jhiTranslate="uzbekjobjhipsterApp.companyMembers.businessRegNum">Business Reg Num</span></dt>
+        <dd>
+          <span>{{ companyMembers.businessRegNum }}</span>
+        </dd>
+        <dt><span jhiTranslate="uzbekjobjhipsterApp.companyMembers.represantitiveName">Represantitive Name</span></dt>
+        <dd>
+          <span>{{ companyMembers.represantitiveName }}</span>
+        </dd>
+        <dt><span jhiTranslate="uzbekjobjhipsterApp.companyMembers.companyAddress">Company Address</span></dt>
+        <dd>
+          <span>{{ companyMembers.companyAddress }}</span>
+        </dd>
+        <dt><span jhiTranslate="uzbekjobjhipsterApp.companyMembers.subscriberName">Subscriber Name</span></dt>
+        <dd>
+          <span>{{ companyMembers.subscriberName }}</span>
+        </dd>
+        <dt><span jhiTranslate="uzbekjobjhipsterApp.companyMembers.phoneNumber">Phone Number</span></dt>
+        <dd>
+          <span>{{ companyMembers.phoneNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="uzbekjobjhipsterApp.companyMembers.membersType">Members Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'uzbekjobjhipsterApp.MembersTypeEnum.' + companyMembers.membersType }}">{{
+            companyMembers.membersType
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="uzbekjobjhipsterApp.companyMembers.userId">User Id</span></dt>
+        <dd>
+          <div *ngIf="companyMembers.userId">
+            <a [routerLink]="['/users', companyMembers.userId.id, 'view']">{{ companyMembers.userId.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/company-members', companyMembers.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

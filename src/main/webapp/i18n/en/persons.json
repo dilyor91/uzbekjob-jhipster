@@ -1,0 +1,26 @@
+{
+  "uzbekjobjhipsterApp": {
+    "persons": {
+      "home": {
+        "title": "Persons",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Persons",
+        "createOrEditLabel": "Create or edit a Persons",
+        "notFound": "No Persons found"
+      },
+      "created": "A new Persons is created with identifier {{ param }}",
+      "updated": "A Persons is updated with identifier {{ param }}",
+      "deleted": "A Persons is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Persons {{ id }}?"
+      },
+      "detail": {
+        "title": "Persons"
+      },
+      "id": "ID",
+      "name": "Name",
+      "mobilePhone": "Mobile Phone",
+      "userId": "User Id"
+    }
+  }
+}

@@ -1,0 +1,141 @@
+<div>
+  <h2 id="page-heading" data-cy="CompanyMembersHeading">
+    <span jhiTranslate="uzbekjobjhipsterApp.companyMembers.home.title">Company Members</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="uzbekjobjhipsterApp.companyMembers.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-company-members"
+        [routerLink]="['/company-members/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="uzbekjobjhipsterApp.companyMembers.home.createLabel"> Create a new Company Members </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="companyMembers?.length === 0">
+    <span jhiTranslate="uzbekjobjhipsterApp.companyMembers.home.notFound">No Company Members found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="companyMembers && companyMembers.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="companyName">
+            <div class="d-flex">
+              <span jhiTranslate="uzbekjobjhipsterApp.companyMembers.companyName">Company Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="businessRegNum">
+            <div class="d-flex">
+              <span jhiTranslate="uzbekjobjhipsterApp.companyMembers.businessRegNum">Business Reg Num</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="represantitiveName">
+            <div class="d-flex">
+              <span jhiTranslate="uzbekjobjhipsterApp.companyMembers.represantitiveName">Represantitive Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="companyAddress">
+            <div class="d-flex">
+              <span jhiTranslate="uzbekjobjhipsterApp.companyMembers.companyAddress">Company Address</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="subscriberName">
+            <div class="d-flex">
+              <span jhiTranslate="uzbekjobjhipsterApp.companyMembers.subscriberName">Subscriber Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="phoneNumber">
+            <div class="d-flex">
+              <span jhiTranslate="uzbekjobjhipsterApp.companyMembers.phoneNumber">Phone Number</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="membersType">
+            <div class="d-flex">
+              <span jhiTranslate="uzbekjobjhipsterApp.companyMembers.membersType">Members Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="userId.id">
+            <div class="d-flex">
+              <span jhiTranslate="uzbekjobjhipsterApp.companyMembers.userId">User Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let companyMembers of companyMembers; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/company-members', companyMembers.id, 'view']">{{ companyMembers.id }}</a>
+          </td>
+          <td>{{ companyMembers.companyName }}</td>
+          <td>{{ companyMembers.businessRegNum }}</td>
+          <td>{{ companyMembers.represantitiveName }}</td>
+          <td>{{ companyMembers.companyAddress }}</td>
+          <td>{{ companyMembers.subscriberName }}</td>
+          <td>{{ companyMembers.phoneNumber }}</td>
+          <td jhiTranslate="{{ 'uzbekjobjhipsterApp.MembersTypeEnum.' + companyMembers.membersType }}">{{ companyMembers.membersType }}</td>
+          <td>
+            <div *ngIf="companyMembers.userId">
+              <a [routerLink]="['/users', companyMembers.userId.id, 'view']">{{ companyMembers.userId.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/company-members', companyMembers.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/company-members', companyMembers.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(companyMembers)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

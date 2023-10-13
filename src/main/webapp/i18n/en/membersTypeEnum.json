@@ -1,0 +1,9 @@
+{
+  "uzbekjobjhipsterApp": {
+    "MembersTypeEnum": {
+      "null": "",
+      "FIRM_MEMBER": "FIRM_MEMBER",
+      "COMPANY_MEMBER": "COMPANY_MEMBER"
+    }
+  }
+}

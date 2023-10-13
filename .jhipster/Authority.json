@@ -1,5 +1,6 @@
 {
   "applications": "*",
+  "changelogDate": "20231013100750",
   "entityTableName": "authority",
   "fields": [
     {
@@ -16,5 +17,6 @@
       "relationshipSide": "right",
       "relationshipType": "many-to-many"
     }
-  ]
+  ],
+  "searchEngine": "no"
 }
