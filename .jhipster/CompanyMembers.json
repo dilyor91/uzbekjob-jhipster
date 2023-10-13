@@ -1,0 +1,44 @@
+{
+  "applications": "*",
+  "entityTableName": "company_members",
+  "fields": [
+    {
+      "fieldName": "companyName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "businessRegNum",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "represantitiveName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "companyAddress",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "subscriberName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "membersType",
+      "fieldType": "MembersTypeEnum",
+      "fieldValues": "FIRM_MEMBER,COMPANY_MEMBER"
+    }
+  ],
+  "name": "CompanyMembers",
+  "relationships": [
+    {
+      "otherEntityName": "users",
+      "relationshipName": "userId",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ]
+}
