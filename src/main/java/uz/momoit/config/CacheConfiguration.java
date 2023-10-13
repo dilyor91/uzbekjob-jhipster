@@ -38,6 +38,12 @@ public class CacheConfiguration {
         return cm -> {
             createCache(cm, uz.momoit.repository.UserRepository.USERS_BY_LOGIN_CACHE);
             createCache(cm, uz.momoit.repository.UserRepository.USERS_BY_EMAIL_CACHE);
+            createCache(cm, uz.momoit.domain.Authority.class.getName());
+            createCache(cm, uz.momoit.domain.Authority.class.getName() + ".users");
+            createCache(cm, uz.momoit.domain.Users.class.getName());
+            createCache(cm, uz.momoit.domain.Users.class.getName() + ".authorities");
+            createCache(cm, uz.momoit.domain.Persons.class.getName());
+            createCache(cm, uz.momoit.domain.CompanyMembers.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="users">
+      <h2 data-cy="usersDetailsHeading"><span jhiTranslate="uzbekjobjhipsterApp.users.detail.title">Users</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ users.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="uzbekjobjhipsterApp.users.userName">User Name</span></dt>
+        <dd>
+          <span>{{ users.userName }}</span>
+        </dd>
+        <dt><span jhiTranslate="uzbekjobjhipsterApp.users.email">Email</span></dt>
+        <dd>
+          <span>{{ users.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="uzbekjobjhipsterApp.users.password">Password</span></dt>
+        <dd>
+          <span>{{ users.password }}</span>
+        </dd>
+        <dt><span jhiTranslate="uzbekjobjhipsterApp.users.status">Status</span></dt>
+        <dd>
+          <span>{{ users.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="uzbekjobjhipsterApp.users.createdAt">Created At</span></dt>
+        <dd>
+          <span>{{ users.createdAt | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="uzbekjobjhipsterApp.users.updatedAt">Updated At</span></dt>
+        <dd>
+          <span>{{ users.updatedAt | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="uzbekjobjhipsterApp.users.createdBy">Created By</span></dt>
+        <dd>
+          <span>{{ users.createdBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="uzbekjobjhipsterApp.users.updatedBy">Updated By</span></dt>
+        <dd>
+          <span>{{ users.updatedBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="uzbekjobjhipsterApp.users.authority">Authority</span></dt>
+        <dd>
+          <span *ngFor="let authority of users.authorities; let last = last">
+            <a [routerLink]="['/authority', authority.id, 'view']">{{ authority.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/users', users.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

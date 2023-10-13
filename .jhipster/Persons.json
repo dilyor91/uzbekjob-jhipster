@@ -1,5 +1,6 @@
 {
   "applications": "*",
+  "changelogDate": "20231013100950",
   "entityTableName": "persons",
   "fields": [
     {
@@ -19,5 +20,6 @@
       "relationshipSide": "left",
       "relationshipType": "one-to-one"
     }
-  ]
+  ],
+  "searchEngine": "no"
 }

@@ -1,0 +1,139 @@
+<div>
+  <h2 id="page-heading" data-cy="UsersHeading">
+    <span jhiTranslate="uzbekjobjhipsterApp.users.home.title">Users</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="uzbekjobjhipsterApp.users.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-users"
+        [routerLink]="['/users/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="uzbekjobjhipsterApp.users.home.createLabel"> Create a new Users </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="users?.length === 0">
+    <span jhiTranslate="uzbekjobjhipsterApp.users.home.notFound">No Users found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="users && users.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="userName">
+            <div class="d-flex">
+              <span jhiTranslate="uzbekjobjhipsterApp.users.userName">User Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="email">
+            <div class="d-flex">
+              <span jhiTranslate="uzbekjobjhipsterApp.users.email">Email</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="password">
+            <div class="d-flex">
+              <span jhiTranslate="uzbekjobjhipsterApp.users.password">Password</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="uzbekjobjhipsterApp.users.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="createdAt">
+            <div class="d-flex">
+              <span jhiTranslate="uzbekjobjhipsterApp.users.createdAt">Created At</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="updatedAt">
+            <div class="d-flex">
+              <span jhiTranslate="uzbekjobjhipsterApp.users.updatedAt">Updated At</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="createdBy">
+            <div class="d-flex">
+              <span jhiTranslate="uzbekjobjhipsterApp.users.createdBy">Created By</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="updatedBy">
+            <div class="d-flex">
+              <span jhiTranslate="uzbekjobjhipsterApp.users.updatedBy">Updated By</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="authority.id">
+            <div class="d-flex">
+              <span jhiTranslate="uzbekjobjhipsterApp.users.authority">Authority</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let users of users; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/users', users.id, 'view']">{{ users.id }}</a>
+          </td>
+          <td>{{ users.userName }}</td>
+          <td>{{ users.email }}</td>
+          <td>{{ users.password }}</td>
+          <td>{{ users.status }}</td>
+          <td>{{ users.createdAt | formatMediumDatetime }}</td>
+          <td>{{ users.updatedAt | formatMediumDatetime }}</td>
+          <td>{{ users.createdBy }}</td>
+          <td>{{ users.updatedBy }}</td>
+          <td>
+            <span *ngFor="let authority of users.authorities; let last = last">
+              <a class="form-control-static" [routerLink]="['/authority', authority.id, 'view']">{{ authority.id }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/users', users.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/users', users.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(users)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

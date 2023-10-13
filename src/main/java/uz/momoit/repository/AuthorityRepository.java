@@ -1,9 +1,12 @@
 package uz.momoit.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.*;
+import org.springframework.stereotype.Repository;
 import uz.momoit.domain.Authority;
 
 /**
- * Spring Data JPA repository for the {@link Authority} entity.
+ * Spring Data JPA repository for the Authority entity.
  */
-public interface AuthorityRepository extends JpaRepository<Authority, String> {}
+@SuppressWarnings("unused")
+@Repository
+public interface AuthorityRepository extends JpaRepository<Authority, Long> {}
